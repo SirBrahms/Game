@@ -68,7 +68,7 @@ class Graphics
 
 		var line = new PathAnnotation() {
 			LineColor = cyan,
-			Points = RandomPoints.OrderBy (p => p.X).ToList (),
+			Points = RandomPoints.OrderBy(p => p.X).ToList (),
 			BeforeSeries = true,
 			LineRune = new Rune('█'),
 		};
