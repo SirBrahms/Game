@@ -4,6 +4,7 @@ using NStack;
 using System.Runtime.CompilerServices;
 using Game.Spells;
 using System.Reflection.Metadata.Ecma335;
+using Game.Enemies;
 
 static class GameViewSetup 
 {
@@ -262,14 +263,14 @@ static class GameViewSetup
             X = Pos.Center(),
             Y = Pos.Bottom(ViewDeck) + 1,
         };
-        ButtonFight.Clicked += () => GameActions.FightCurrentEnemy();
+        ButtonFight.Clicked += () => EnemyManager.FightCurrentEnemy();
         ViewInventory.Add(ButtonFight);
         ViewInventory.FocusFirst();
         ViewInventory.SetFocus();
 
         //--
         ViewCurrent.Add(ViewFightText, ViewEnemy, ViewInventory);
-        GameActions.CreateEnemy();
+        EnemyManager.CreateEnemy();
     }
 
     public static void SetupApprentices()

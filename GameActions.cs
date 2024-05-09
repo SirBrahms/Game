@@ -26,9 +26,9 @@ static class GameActions
     public static Graphics Graphics = new Graphics(FightDisplayGraph);
 
     // Fight
-    public static IEnemy? CurrentEnemy;
-    private static bool EnemyIsAlive = true;
-    private static List<Type> Enemies = new List<Type>();
+    //public static IEnemy? CurrentEnemy;
+    //private static bool EnemyIsAlive = true;
+    //private static List<Type> Enemies = new List<Type>();
     private static List<Type> Items = new List<Type>();
     public static List<Type> Spells = new List<Type>();
     // Deck
@@ -59,7 +59,8 @@ static class GameActions
     {
         try
         {
-            Enemies = EnemyManager.GetAllEnemies();
+            //Enemies = EnemyManager.GetAllEnemies();
+            EnemyManager.Init();
             GetAllItems();
             GetAllSpells();
         }
@@ -173,129 +174,9 @@ static class GameActions
         ListSpells();
     }
 
-    // Params: None
-    // Returns: Nothing
-    // Function that makes a random Enemy appear on Screen and initializes the players health
-    public static void CreateEnemy()
-    {
-        Random r = new Random();
-        if (CurrentEnemy is null || !EnemyIsAlive)
-        {
-            Type CurrentEnemyType = Enemies[r.Next(Enemies.Count)];
+    
 
-            var EnemyInstance = (IEnemy?)Activator.CreateInstance(CurrentEnemyType) ?? throw new Exception("Somehow got Null: CreateEnemy");
-            CurrentEnemy = EnemyInstance;
-        }
-        EnemyIsAlive = true;
-
-        Graphics.DrawImage(Path.GetFullPath(CurrentEnemy.ImagePath));
-        FightDisplayGraph.SetNeedsDisplay();
-
-        GameViewSetup.LabelHP.Text = $"{Player.CurrentHP} / {Player.MaxHP}♥";
-        UpdateMPLabel();
-
-        //GameViewSetup.FightTextContainer.Text = "";
-        Write("");
-        Write($"{CurrentEnemy.Name} Appears!");
-        Write($"HP: {CurrentEnemy.Health} / {CurrentEnemy.MaxHealth}♥");
-        Write($"{CurrentEnemy.Noise[r.Next(CurrentEnemy.Noise.Count)]}");
-        Write("");
-    }
-
-    // Params: None
-    // Returns: Nothing
-    // Function that Handles Fighting the current Enemy
-    public static void FightCurrentEnemy()
-    {
-        if (CurrentEnemy is null)
-            return;
-        
-        Random r = new Random();
-
-        // Player Turn
-        var Damage = r.Next(60);
-        if (DoDamage(Damage))
-            return;
-        
-        // Enemy Turn
-        DoEnemyTurn();
-    }
-
-    // params: Damage to be dealt
-    // returns: void
-    // Does Damage and advances to enemy turn
-    public static void TakeDamageTurn(float Damage)
-    {
-        if (!(CurrentEnemy is null))
-        {
-            if (DoDamage(Damage))
-                return;
-            DoEnemyTurn();
-        }
-        return;
-    }
-
-    // params: Damage to be dealt
-    // returns: a bool specifying wether the enemy has been killed (true = killed)
-    // Does the specifyied damage to the current enemy and updates the textview
-    public static bool DoDamage(float Damage)
-    {
-        if (!(CurrentEnemy is null))
-        {
-            CurrentEnemy.Health -= (int)Damage;
-            Write($"You dealt {Damage} Damage");
-            if (Damage > CurrentEnemy.Health)
-            {
-                WinBattle();
-                return true;
-            }
-            else
-            {
-                Write($"HP: {CurrentEnemy.Health} / {CurrentEnemy.MaxHealth}♥");
-                Write("");
-                GameViewSetup.FightTextContainer.MoveEnd();
-                
-                return false;
-            }
-        }
-        return false;
-    }
-
-    // params: None
-    // returns: nothing
-    // Does the enemies turn by selecting a random attack and using it
-    public static void DoEnemyTurn()
-    {
-        if (CurrentEnemy is null)
-            return;
-        var EnemyDmg = CurrentEnemy.Attacks.GetRandomKVP();
-        Player.CurrentHP -= EnemyDmg.Value;
-        Write($"{CurrentEnemy.Name} used {EnemyDmg.Key}, dealing {EnemyDmg.Value} Damage");
-        Write("");
-        GameViewSetup.FightTextContainer.MoveEnd();
-        if (Player.CurrentHP < 0)
-        {
-            Player.CurrentHP = 0;
-            ShowError("You Died!"); // Add death-screen later
-        }
-
-        GameViewSetup.LabelHP.Text = $"{Player.CurrentHP} / {Player.MaxHP}♥";
-        UpdateMPLabel();
-    }
-
-    // params: None
-    // returns: Nothing
-    // Triggers when the player wins a fight and handles XP/Level-Up logic
-    public static void WinBattle()
-    {
-        EnemyIsAlive = false;
-        Write("You Won!");
-        
-        var Gained = Player.HandleXP(CurrentEnemy ?? throw new Exception("This isn't supposed to happen"));
-        Write($"You got {Gained} ⬙exp");
-        
-        CreateEnemy();
-    }
+    
 
     public static void LevelUp()
     {
