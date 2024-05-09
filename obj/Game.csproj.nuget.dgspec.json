@@ -1,26 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/Game/Game.csproj": {}
+    "C:\\Users\\marc\\OneDrive\\Documents\\Archiv\\Projektordner\\Game_Git\\Game\\Game.csproj": {}
   },
   "projects": {
-    "/mnt/Game/Game.csproj": {
+    "C:\\Users\\marc\\OneDrive\\Documents\\Archiv\\Projektordner\\Game_Git\\Game\\Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/Game/Game.csproj",
+        "projectUniqueName": "C:\\Users\\marc\\OneDrive\\Documents\\Archiv\\Projektordner\\Game_Git\\Game\\Game.csproj",
         "projectName": "Game",
-        "projectPath": "/mnt/Game/Game.csproj",
-        "packagesPath": "/home/brahms/.nuget/packages/",
-        "outputPath": "/mnt/Game/obj/",
+        "projectPath": "C:\\Users\\marc\\OneDrive\\Documents\\Archiv\\Projektordner\\Game_Git\\Game\\Game.csproj",
+        "packagesPath": "C:\\Users\\marc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\marc\\OneDrive\\Documents\\Archiv\\Projektordner\\Game_Git\\Game\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/brahms/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\marc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/opt/cosmos/Packages/": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\marc\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -68,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.405/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
