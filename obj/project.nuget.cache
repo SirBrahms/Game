@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZQCAYUZNBNgT1bKDdd2pL2QPvnltcJEv2qprUHTrz4tZngi2n3jYOk34j9cnHvop6yhVh+jxUxLsOK5+yO9gvQ==",
+  "success": true,
+  "projectFilePath": "/mnt/Game/Game.csproj",
+  "expectedPackageFiles": [
+    "/home/brahms/.nuget/packages/microsoft.win32.systemevents/7.0.0/microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "/home/brahms/.nuget/packages/nstack.core/1.1.1/nstack.core.1.1.1.nupkg.sha512",
+    "/home/brahms/.nuget/packages/sixlabors.imagesharp/3.1.4/sixlabors.imagesharp.3.1.4.nupkg.sha512",
+    "/home/brahms/.nuget/packages/system.codedom/8.0.0/system.codedom.8.0.0.nupkg.sha512",
+    "/home/brahms/.nuget/packages/system.drawing.common/7.0.0/system.drawing.common.7.0.0.nupkg.sha512",
+    "/home/brahms/.nuget/packages/system.management/8.0.0/system.management.8.0.0.nupkg.sha512",
+    "/home/brahms/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
+    "/home/brahms/.nuget/packages/terminal.gui/1.15.1/terminal.gui.1.15.1.nupkg.sha512"
+  ],
+  "logs": []
+}
