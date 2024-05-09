@@ -1,3 +1,5 @@
+using Game.Enemies;
+
 namespace Game.Spells;
 
 public class MagicTransgenderBlast : Spell
@@ -8,11 +10,11 @@ public class MagicTransgenderBlast : Spell
     public override void Action()
     {
         base.Action();
-        if (!(GameActions.CurrentEnemy is null))
+        if (!(EnemyManager.CurrentEnemy is null))
         {
-            if (GameActions.DoDamage(100))
+            if (EnemyManager.DoDamage(100))
                 return;
-            GameActions.DoEnemyTurn();
+            EnemyManager.DoEnemyTurn();
         }
         return;
     }

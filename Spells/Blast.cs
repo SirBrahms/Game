@@ -1,3 +1,5 @@
+using Game.Enemies;
+
 namespace Game.Spells;
 
 public class Blast : Spell
@@ -8,11 +10,11 @@ public class Blast : Spell
     public override void Action()
     {
         base.Action();
-        if (!(GameActions.CurrentEnemy is null))
+        if (!(EnemyManager.CurrentEnemy is null))
         {
-            if (GameActions.DoDamage(50))
+            if (EnemyManager.DoDamage(50))
                 return;
-            GameActions.DoEnemyTurn();
+            EnemyManager.DoEnemyTurn();
         }
         return;
     }

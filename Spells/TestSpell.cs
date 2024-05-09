@@ -1,3 +1,5 @@
+using Game.Enemies;
+
 namespace Game.Spells;
 
 public class TestSpell : Spell
@@ -8,7 +10,7 @@ public class TestSpell : Spell
     public override void Action()
     {
         base.Action();
-        GameActions.TakeDamageTurn(10);
+        EnemyManager.TakeDamageTurn(10);
         return;
     }
 }
