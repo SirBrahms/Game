@@ -101,19 +101,18 @@ class Graphics
 		DisplayGraph.Reset();
 		ImageToDraw.Clear();
 		//DisplayGraph.SetNeedsDisplay();
-		using (var Image = SixLabors.ImageSharp.Image.Load<Argb32>(ImgPath))
+		using (var Image = SixLabors.ImageSharp.Image.Load<Rgba32>(ImgPath))
 		{
 			Img = Image;
 
-			Image.Mutate(i => RotateExtensions.Rotate(i, RotateMode.Rotate180)); // Flip the image upside down, since the coordinates of the Graph view are the inverse of the cordinates of the bitmap
+			Image.Mutate(i => RotateFlipExtensions.RotateFlip(i, RotateMode.Rotate180, FlipMode.Horizontal)); // Flip the image upside down, since the coordinates of the Graph view are the inverse of the cordinates of the bitmap
 			
 			// Read image into Storage
 			for (int x = 0; x < Image.Width; x++)
 			{
 				for (int y = 0; y < Image.Height; y++)
 				{
-					var ColorPixel = ConvertSystemColorToTerminalAttribute(System.Drawing.Color.FromArgb((int)Image[x, y].Argb));
-
+					var ColorPixel = ConvertSystemColorToTerminalAttribute(System.Drawing.Color.FromArgb((int)Image[x, y].Rgba));
 					ImageToDraw.Add(new ColorPoint
 									{
 										X = x,
