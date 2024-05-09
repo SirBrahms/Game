@@ -13,8 +13,8 @@ class ItemManager
         {
             var CurrentType = All[r.Next(All.Count - 1)];
 
-            var EnemyInstance = (IItem?)Activator.CreateInstance(CurrentType) ?? throw new Exception("Somehow got Null: GetRandomEnemy");
-            Items.Add(EnemyInstance);
+            var ItemInstance = (IItem?)Activator.CreateInstance(CurrentType) ?? throw new Exception("Somehow got Null: GetRandomEnemy");
+            Items.Add(ItemInstance);
         }
         return Items;
     }
