@@ -232,6 +232,17 @@ static class GameViewSetup
         ViewEnemy.Add(GameActions.FightDisplayGraph);
 
         // View Inventory
+        SetupViewInventory();
+
+        //--
+        ViewCurrent.Add(ViewFightText, ViewEnemy, ViewInventory);
+        EnemyManager.CreateEnemy();
+    }
+
+    public static void SetupViewInventory()
+    {
+        ViewInventory.RemoveAll();
+
         ViewInventory.Height = Dim.Fill();
         ViewInventory.Width = Dim.Fill();
         ViewInventory.Y = Pos.Bottom(ViewFightText);
@@ -267,10 +278,30 @@ static class GameViewSetup
         ViewInventory.Add(ButtonFight);
         ViewInventory.FocusFirst();
         ViewInventory.SetFocus();
+    }
 
-        //--
-        ViewCurrent.Add(ViewFightText, ViewEnemy, ViewInventory);
-        EnemyManager.CreateEnemy();
+    public static void SetupAfterFightChoices()
+    {
+        ViewInventory.RemoveAll();
+
+        Button ButtonNorth = new Button("Go North")
+        {
+            X = Pos.Center(),
+            Y = Pos.Center()
+        };
+        Button ButtonWest = new Button("Go West")
+        {
+            X = Pos.Right(ButtonNorth) + 10,
+            Y = Pos.Center()
+        };
+        Button ButtonEast = new Button("Go East")
+        {
+            X = Pos.Left(ButtonNorth) - 20,
+            Y = Pos.Center()
+        };
+        
+
+        ViewInventory.Add(ButtonEast, ButtonNorth, ButtonWest);
     }
 
     public static void SetupApprentices()
