@@ -6,6 +6,7 @@ using Game.Enemies;
 using Game.Items;
 using Game.Spells;
 using NStack;
+using Game.Types;
 
 static class GameActions 
 {
@@ -61,6 +62,7 @@ static class GameActions
         {
             //Enemies = EnemyManager.GetAllEnemies();
             EnemyManager.Init();
+            RoomManager.Init();
             GetAllItems();
             GetAllSpells();
         }
