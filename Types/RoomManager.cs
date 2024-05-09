@@ -1,12 +1,18 @@
-using System.Reflection;
-using System.Transactions;
 using Game.Enemies;
+using Game.Items;
 
 namespace Game.Types;
 
 static class RoomMAnager
 {
-    public static Room? CurrentRoom { get; set; }
+    #pragma warning disable // Init must be called anyway
+    public static Room CurrentRoom { get; set; }
+    #pragma warning restore
+
+    public static void Init()
+    {
+        CurrentRoom = CreateRandomStandardRoom();
+    }
 
     public static Room CreateRandomStandardRoom()
     {
