@@ -106,6 +106,7 @@ class Graphics
 			Img = Image;
 
 			Image.Mutate(i => RotateExtensions.Rotate(i, RotateMode.Rotate180)); // Flip the image upside down, since the coordinates of the Graph view are the inverse of the cordinates of the bitmap
+			Image.Mutate(i => InvertExtensions.Invert(i)); // Invert the colors
 
 			// Read image into Storage
 			for (int x = 0; x < Image.Width; x++)
