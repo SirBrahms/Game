@@ -276,7 +276,7 @@ static class GameActions
         v.Text += Text + Environment.NewLine;
     }
 
-    public static void Write(string Text)
+    public static void Write(string Text = "")
     {
         GameViewSetup.FightTextContainer.Text += Text + Environment.NewLine;
         GameViewSetup.FightTextContainer.MoveEnd();
