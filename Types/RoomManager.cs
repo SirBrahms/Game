@@ -1,5 +1,6 @@
 using Game.Enemies;
 using Game.Items;
+using Terminal.Gui;
 
 namespace Game.Types;
 
@@ -27,6 +28,7 @@ static class RoomManager
     {
         RoomAmount = Rand.Next(1, 5);
 
+        GameActions.Write();
         if (Player.CurrentHP < Player.MaxHP * 0.5)
             GameActions.Write($"You stumble out of the room, finding yourself in front of {RoomAmount} doors");
         else
@@ -41,14 +43,15 @@ static class RoomManager
         GameViewSetup.SetupAfterFightChoices(Enumerable.Range(1, RoomAmount).Select(x => x.ToString()).ToArray());
     }
 
-    public static void LoadRoomFromSelection(int Index)
+    public static void LoadRoomFromSelection(object sender)
     {
-        GameActions.ShowData(RoomAmount.ToString(), Index.ToString());
+        EButton SenderBtn = (EButton)sender;
+        int Index = int.Parse(SenderBtn.Data.ToString() ?? throw new Exception("unregistered button: LoadFromSelection"));
         if (Index > RoomAmount)
             throw new ArgumentOutOfRangeException(nameof(Index));
         
         GameActions.Clear();
-        CurrentRoom = NextRooms[Index - 1];
+        CurrentRoom = NextRooms[Index];
         GameViewSetup.SetupViewInventory();
         EnemyManager.CurrentEnemyInRoom = 0;
     }

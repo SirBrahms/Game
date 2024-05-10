@@ -6,6 +6,7 @@ using Game.Spells;
 using System.Reflection.Metadata.Ecma335;
 using Game.Enemies;
 using Game.Types;
+using System.Threading.Tasks.Sources;
 
 static class GameViewSetup 
 {
@@ -283,20 +284,44 @@ static class GameViewSetup
 
     public static void SetupAfterFightChoices(params string[] Directions)
     {
+        LabelHP.X = Pos.Center() + 5;
+        LabelHP.TextAlignment = TextAlignment.Centered;
+        ViewInventory.Add(LabelHP);
+
+        LabelMP.X = Pos.Left(LabelHP) - 15;
+        LabelMP.TextAlignment = TextAlignment.Centered;
+        ViewInventory.Add(LabelMP);
+
         ViewInventory.RemoveAll();
-        List<Button> Buttons = new List<Button>();
+        List<EButton> Buttons = new List<EButton>();
 
         if (Directions.Length == 0)
         {
             throw new Exception("No room choices");
         }
         
-        GameActions.ShowData(Directions.Length.ToString());
+        //GameActions.ShowData(Directions.Length.ToString());
 
         for (int i = 0; i < Directions.Length; i++)
         {
-            var btn = new Button($"Go {Directions[i]}");
-            btn.Clicked += () => RoomManager.LoadRoomFromSelection(i);
+            var btn = new EButton
+            {
+                Text = $"Go {Directions[i]}"
+            };
+
+            if (i == 0)
+            {
+                btn.X = 1;
+            }
+            else
+            {
+                btn.X = Pos.Left(Buttons[i - 1]) + 10;
+            }
+            btn.Y = Pos.Center();
+            btn.Data = i;
+
+            btn.Clicked += (e) => RoomManager.LoadRoomFromSelection(e); 
+            Buttons.Add(btn);
             ViewInventory.Add(btn);
         }
     }
