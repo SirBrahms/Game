@@ -7,12 +7,10 @@ public static class EnemyManager
 {
     public static IEnemy? CurrentEnemy { get; set; }
     public static bool EnemyIsAlive { get; set; } = true;
-    public static List<Type> Enemies { get; set; } = new List<Type>();
     public static int CurrentEnemyInRoom { get; set; } = 0;
 
     public static void Init()
     {
-        Enemies = GetAllEnemies();
         //GameActions.ShowData(RoomManager.CurrentRoom.Enemies.Count.ToString(), EnemyIsAlive.ToString());
         CreateEnemy();
     }
@@ -37,7 +35,7 @@ public static class EnemyManager
     {
         List<Type> EnemiesRet = new List<Type>();
         Random r = new Random();
-        for (int i = 0; i < r.Next(1, 5); i++)
+        for (int i = 0; i < r.Next(3, 7); i++)
         {
             var Enemies = GetAllEnemies();
             var CurrentEnemyType = Enemies[r.Next(Enemies.Count - 1)];

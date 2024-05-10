@@ -10,7 +10,7 @@ static class RoomManager
     public static Room CurrentRoom { get; set; }
     #pragma warning restore
     public static int RoomAmount { get; private set; }
-    public static List<Room> NextRooms { get; set; } = new List<Room>(); // Only contains as many elements as indicated by room amount
+    public static List<Room> NextRooms { get; set; } = new List<Room>(); // Only contains as many elements as indicated by RoomAmount
     
     private static Random Rand = new Random();
 
@@ -47,6 +47,7 @@ static class RoomManager
     {
         EButton SenderBtn = (EButton)Sender;
         int Index = int.Parse(SenderBtn.Data.ToString() ?? throw new Exception("unregistered button: LoadFromSelection"));
+        GameActions.ShowData(Index.ToString());
         if (Index > RoomAmount)
             throw new ArgumentOutOfRangeException(nameof(Index));
         
@@ -55,6 +56,7 @@ static class RoomManager
         GameViewSetup.SetupViewInventory();
         EnemyManager.CurrentEnemyInRoom = 0;
         EnemyManager.CreateEnemy();
+        NextRooms.Clear();
     }
 
     
