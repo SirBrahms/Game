@@ -64,6 +64,7 @@ public static class EnemyManager
             CurrentEnemy = EnemyInstance;
             
             // ---
+            CurrentEnemy.Health = CurrentEnemy.MaxHealth;
 
             EnemyIsAlive = true;
 
@@ -122,9 +123,9 @@ public static class EnemyManager
     {
         if (!(CurrentEnemy is null))
         {
-            CurrentEnemy.Health -= (int)Damage;
+            CurrentEnemy.Health -= Damage;
             GameActions.Write($"You dealt {Damage} Damage");
-            if (Damage > CurrentEnemy.Health)
+            if (CurrentEnemy.Health <= 0)
             {
                 WinBattle();
                 return true;

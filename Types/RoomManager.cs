@@ -43,9 +43,9 @@ static class RoomManager
         GameViewSetup.SetupAfterFightChoices(Enumerable.Range(1, RoomAmount).Select(x => x.ToString()).ToArray());
     }
 
-    public static void LoadRoomFromSelection(object sender)
+    public static void LoadRoomFromSelection(object Sender)
     {
-        EButton SenderBtn = (EButton)sender;
+        EButton SenderBtn = (EButton)Sender;
         int Index = int.Parse(SenderBtn.Data.ToString() ?? throw new Exception("unregistered button: LoadFromSelection"));
         if (Index > RoomAmount)
             throw new ArgumentOutOfRangeException(nameof(Index));
@@ -54,6 +54,7 @@ static class RoomManager
         CurrentRoom = NextRooms[Index];
         GameViewSetup.SetupViewInventory();
         EnemyManager.CurrentEnemyInRoom = 0;
+        EnemyManager.CreateEnemy();
     }
 
     
