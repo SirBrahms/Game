@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using Game.Spells;
 using System.Reflection.Metadata.Ecma335;
 using Game.Enemies;
+using Game.Types;
 
 static class GameViewSetup 
 {
@@ -280,28 +281,22 @@ static class GameViewSetup
         ViewInventory.SetFocus();
     }
 
-    public static void SetupAfterFightChoices()
+    public static void SetupAfterFightChoices(params string[] Directions)
     {
         ViewInventory.RemoveAll();
+        List<Button> Buttons = new List<Button>();
 
-        Button ButtonNorth = new Button("Go North")
+        if (Directions.Length == 0)
         {
-            X = Pos.Center(),
-            Y = Pos.Center()
-        };
-        Button ButtonWest = new Button("Go West")
-        {
-            X = Pos.Right(ButtonNorth) + 10,
-            Y = Pos.Center()
-        };
-        Button ButtonEast = new Button("Go East")
-        {
-            X = Pos.Left(ButtonNorth) - 20,
-            Y = Pos.Center()
-        };
+            throw new Exception("No room choices");
+        }
         
-
-        ViewInventory.Add(ButtonEast, ButtonNorth, ButtonWest);
+        for (int i = 0; i < Directions.Length; i++)
+        {
+            var btn = new Button($"Go {Directions[i]}");
+            btn.Clicked += () => RoomManager.LoadRoomFromSelection(i);
+            ViewInventory.Add(btn);
+        }
     }
 
     public static void SetupApprentices()
