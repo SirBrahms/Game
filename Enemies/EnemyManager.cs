@@ -33,17 +33,17 @@ public static class EnemyManager
         return Enemies;
     }
 
-    public static List<IEnemy> GetRandomEnemies()
+    public static List<Type> GetRandomEnemies()
     {
-        List<IEnemy> EnemiesRet = new List<IEnemy>();
+        List<Type> EnemiesRet = new List<Type>();
         Random r = new Random();
         for (int i = 0; i < r.Next(1, 5); i++)
         {
             var Enemies = GetAllEnemies();
             var CurrentEnemyType = Enemies[r.Next(Enemies.Count - 1)];
 
-            var EnemyInstance = (IEnemy?)Activator.CreateInstance(CurrentEnemyType) ?? throw new Exception("Somehow got Null: GetRandomEnemy");
-            EnemiesRet.Add(EnemyInstance);
+            //var EnemyInstance = (IEnemy?)Activator.CreateInstance(CurrentEnemyType) ?? throw new Exception("Somehow got Null: GetRandomEnemy");
+            EnemiesRet.Add(CurrentEnemyType);
         }
 
         return EnemiesRet;
@@ -58,9 +58,9 @@ public static class EnemyManager
         if ((CurrentEnemy is null || !EnemyIsAlive) /*&& RoomManager.CurrentRoom.Enemies.Count != CurrentEnemyInRoom*/)
         {
 
-            IEnemy EnemyInstance = RoomManager.CurrentRoom.Enemies[CurrentEnemyInRoom];
+            Type CurrentEnemyType = RoomManager.CurrentRoom.Enemies[CurrentEnemyInRoom];
 
-            //var EnemyInstance = (IEnemy?)Activator.CreateInstance(CurrentEnemyType) ?? throw new Exception("Somehow got Null: CreateEnemy");
+            var EnemyInstance = (IEnemy?)Activator.CreateInstance(CurrentEnemyType) ?? throw new Exception("Somehow got Null: CreateEnemy");
             CurrentEnemy = EnemyInstance;
             
             // ---

@@ -7,7 +7,7 @@ namespace Game.Types;
 
 class Room
 {
-    public List<IEnemy> Enemies { get; set; } = new List<IEnemy>();
+    public List<Type> Enemies { get; set; } = new List<Type>();
     public List<IItem> Rewards { get; set; } = new List<IItem>();
 
     public string Name { get; set; } = string.Empty;
