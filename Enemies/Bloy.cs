@@ -6,9 +6,9 @@ class Bloy : IEnemy
 
     public string ImagePath { get; } = "img/bloy.png";
 
-    public int Health { get; set; } = 95;
+    public float Health { get; set; } = 95;
 
-    public int MaxHealth { get; } = 95;
+    public float MaxHealth { get; } = 95;
 
     public int Level { get; } = 1;
 
