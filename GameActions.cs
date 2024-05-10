@@ -61,14 +61,14 @@ static class GameActions
         try
         {
             //Enemies = EnemyManager.GetAllEnemies();
-            EnemyManager.Init();
             RoomManager.Init();
+            EnemyManager.Init();
             GetAllItems();
             GetAllSpells();
         }
         catch (Exception ex)
         {
-            ShowError(ex.Message);
+            ShowError($"{ex.Message}: {ex.StackTrace}");
             return 1;
         }
         return 0;

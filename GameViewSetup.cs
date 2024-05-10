@@ -237,7 +237,7 @@ static class GameViewSetup
 
         //--
         ViewCurrent.Add(ViewFightText, ViewEnemy, ViewInventory);
-        EnemyManager.CreateEnemy();
+        //EnemyManager.CreateEnemy();
     }
 
     public static void SetupViewInventory()
@@ -291,6 +291,8 @@ static class GameViewSetup
             throw new Exception("No room choices");
         }
         
+        GameActions.ShowData(Directions.Length.ToString());
+
         for (int i = 0; i < Directions.Length; i++)
         {
             var btn = new Button($"Go {Directions[i]}");

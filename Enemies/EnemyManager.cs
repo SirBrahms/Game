@@ -1,4 +1,5 @@
 using System.Reflection;
+using Game.Types;
 
 namespace Game.Enemies;
 
@@ -7,10 +8,13 @@ public static class EnemyManager
     public static IEnemy? CurrentEnemy { get; set; }
     public static bool EnemyIsAlive { get; set; } = true;
     public static List<Type> Enemies { get; set; } = new List<Type>();
+    public static int CurrentEnemyInRoom { get; set; } = 0;
 
     public static void Init()
     {
         Enemies = GetAllEnemies();
+        //GameActions.ShowData(RoomManager.CurrentRoom.Enemies.Count.ToString(), EnemyIsAlive.ToString());
+        CreateEnemy();
     }
 
     // Params: None
@@ -33,7 +37,7 @@ public static class EnemyManager
     {
         List<IEnemy> EnemiesRet = new List<IEnemy>();
         Random r = new Random();
-        for (int i = 0; i > r.Next(1, 5); i++)
+        for (int i = 0; i < r.Next(1, 5); i++)
         {
             var Enemies = GetAllEnemies();
             var CurrentEnemyType = Enemies[r.Next(Enemies.Count - 1)];
@@ -51,27 +55,31 @@ public static class EnemyManager
     public static void CreateEnemy()
     {
         Random r = new Random();
-        if (CurrentEnemy is null || !EnemyIsAlive)
+        if ((CurrentEnemy is null || !EnemyIsAlive) /*&& RoomManager.CurrentRoom.Enemies.Count != CurrentEnemyInRoom*/)
         {
-            Type CurrentEnemyType = Enemies[r.Next(Enemies.Count)];
 
-            var EnemyInstance = (IEnemy?)Activator.CreateInstance(CurrentEnemyType) ?? throw new Exception("Somehow got Null: CreateEnemy");
+            IEnemy EnemyInstance = RoomManager.CurrentRoom.Enemies[CurrentEnemyInRoom];
+
+            //var EnemyInstance = (IEnemy?)Activator.CreateInstance(CurrentEnemyType) ?? throw new Exception("Somehow got Null: CreateEnemy");
             CurrentEnemy = EnemyInstance;
+            
+            // ---
+
+            EnemyIsAlive = true;
+
+            GameActions.Graphics.DrawImage(Path.GetFullPath(CurrentEnemy.ImagePath));
+            GameActions.FightDisplayGraph.SetNeedsDisplay();
+
+            GameViewSetup.LabelHP.Text = $"{Player.CurrentHP} / {Player.MaxHP}♥";
+            GameActions.UpdateMPLabel();
+
+            //GameViewSetup.FightTextContainer.Text = "";
+            GameActions.Write("");
+            GameActions.Write($"{CurrentEnemy.Name} Appears!");
+            GameActions.Write($"HP: {CurrentEnemy.Health} / {CurrentEnemy.MaxHealth}♥");
+            GameActions.Write($"{CurrentEnemy.Noise[r.Next(CurrentEnemy.Noise.Count)]}");
+            GameActions.Write("");
         }
-        EnemyIsAlive = true;
-
-        GameActions.Graphics.DrawImage(Path.GetFullPath(CurrentEnemy.ImagePath));
-        GameActions.FightDisplayGraph.SetNeedsDisplay();
-
-        GameViewSetup.LabelHP.Text = $"{Player.CurrentHP} / {Player.MaxHP}♥";
-        GameActions.UpdateMPLabel();
-
-        //GameViewSetup.FightTextContainer.Text = "";
-        GameActions.Write("");
-        GameActions.Write($"{CurrentEnemy.Name} Appears!");
-        GameActions.Write($"HP: {CurrentEnemy.Health} / {CurrentEnemy.MaxHealth}♥");
-        GameActions.Write($"{CurrentEnemy.Noise[r.Next(CurrentEnemy.Noise.Count)]}");
-        GameActions.Write("");
     }
 
     // Params: None
@@ -160,12 +168,16 @@ public static class EnemyManager
     // Triggers when the player wins a fight and handles XP/Level-Up logic
     public static void WinBattle()
     {
+        CurrentEnemyInRoom++;
         EnemyIsAlive = false;
         GameActions.Write("You Won!");
         
         var Gained = Player.HandleXP(CurrentEnemy ?? throw new Exception("This isn't supposed to happen"));
         GameActions.Write($"You got {Gained} ⬙exp");
         
-        CreateEnemy();
+        if (RoomManager.CurrentRoom.Enemies.Count != CurrentEnemyInRoom)
+            CreateEnemy();
+        else
+            RoomManager.RoomChange();
     }
 }
