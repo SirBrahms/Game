@@ -272,7 +272,7 @@ static class GameViewSetup
         ListDeck.SetSource(GameActions.GetDeckSpells());
         ListDeck.Width = Dim.Fill();
         ListDeck.Height = Dim.Fill();
-        ListDeck.OpenSelectedItem += GameActions.CastSpellInDeck;
+        ListDeck.OpenSelectedItem += (e) => { /*GameActions.ShowData(e.Item.ToString());*/ GameActions.CastSpellInDeck(e); };
 
         ViewDeck.Add(ListDeck);
 

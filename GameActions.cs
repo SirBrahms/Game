@@ -205,17 +205,16 @@ static class GameActions
 
     public static void CastSpellInDeck(ListViewItemEventArgs e)
     {
-        bool Run = true;
-        //ShowData(Deck[e.Item].Name);
-        var S = (Spell?)Activator.CreateInstance(Deck[e.Item]);
-        if (S is null)
+        var SpellInstance = (Spell?)Activator.CreateInstance(Deck[e.Item]) ?? throw new Exception("Somehow got Null: CreateSpell");
+        if (Player.CurrentMP - SpellInstance.Cost >= 0)
         {
-            return;
+            SpellInstance.Action();
+            //Player.CurrentHP -= SpellInstance.Cost;
         }
-        if ((Player.CurrentMP - S.Cost) >= 0 && Run)
+        else
         {
-            S.Action();
-            Run = false;
+            Player.CurrentMP = 0;
+            UpdateMPLabel();
         }
     }
 
@@ -235,6 +234,10 @@ static class GameActions
         var S = CreateSpellInstance(CurrentlySelectedSpell);
         if ((Deck.Count + S.SlotCost) <= DeckSize)
         {
+            if (Deck.Contains(Spells[CurrentlySelectedSpell]))
+            {
+                return;
+            }
             Deck.Add(Spells[CurrentlySelectedSpell]);
         }
         else
