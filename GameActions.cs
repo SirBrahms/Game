@@ -18,13 +18,8 @@ static class GameActions
         {"Create Lamp", $"A lamp will appear out of thin air in front of you. You won't know what kind of Lamp, but it'll  be a lamp."},
         {"Summon Pen", $"This spell summons a pen straight from the ninth circle of hell."}*/
     };
-
-    public static GraphView FightDisplayGraph = new GraphView()
-    {
-        Height = Dim.Fill(),
-        Width = Dim.Fill(),
-    };
-    public static Graphics Graphics = new Graphics(FightDisplayGraph);
+    
+    public static Graphics Graphics = new Graphics(GameViewSetup.FightDisplayGraph);
 
     // Fight
     //public static IEnemy? CurrentEnemy;

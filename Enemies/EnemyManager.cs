@@ -12,7 +12,7 @@ public static class EnemyManager
     public static void Init()
     {
         //GameActions.ShowData(RoomManager.CurrentRoom.Enemies.Count.ToString(), EnemyIsAlive.ToString());
-        CreateEnemy();
+        //CreateEnemy();
     }
 
     // Params: None
@@ -67,7 +67,7 @@ public static class EnemyManager
             EnemyIsAlive = true;
 
             GameActions.Graphics.DrawImage(Path.GetFullPath(CurrentEnemy.ImagePath));
-            GameActions.FightDisplayGraph.SetNeedsDisplay();
+            GameViewSetup.FightDisplayGraph.SetNeedsDisplay();
 
             GameViewSetup.LabelHP.Text = $"{Player.CurrentHP} / {Player.MaxHP}♥";
             GameActions.UpdateMPLabel();

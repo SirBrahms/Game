@@ -43,6 +43,11 @@ static class GameViewSetup
     public static FrameView ViewDeck = new FrameView("Deck");
     public static ListView ListDeck = new ListView();
     //public static GraphView DisplayGraph = new GraphView();
+    public static GraphView FightDisplayGraph = new GraphView()
+    {
+        Height = Dim.Fill(),
+        Width = Dim.Fill(),
+    };
 
     #endregion
 
@@ -219,22 +224,24 @@ static class GameViewSetup
         ViewEnemy.Border.BorderStyle = BorderStyle.Double;
         ViewEnemy.CanFocus = false;
 
-        GameActions.FightDisplayGraph.Reset();
-        GameActions.FightDisplayGraph.AxisX.Visible = false;
-        GameActions.FightDisplayGraph.AxisX.Increment = 0;
-        GameActions.FightDisplayGraph.AxisX.ShowLabelsEvery = 0;
+        FightDisplayGraph.Reset();
+        FightDisplayGraph.AxisX.Visible = false;
+        FightDisplayGraph.AxisX.Increment = 0;
+        FightDisplayGraph.AxisX.ShowLabelsEvery = 0;
 
-        GameActions.FightDisplayGraph.AxisY.Visible = false;
-        GameActions.FightDisplayGraph.AxisY.Increment = 0;
-        GameActions.FightDisplayGraph.AxisY.ShowLabelsEvery = 0;
+        FightDisplayGraph.AxisY.Visible = false;
+        FightDisplayGraph.AxisY.Increment = 0;
+        FightDisplayGraph.AxisY.ShowLabelsEvery = 0;
 
-        GameActions.FightDisplayGraph.CanFocus = false;
+        FightDisplayGraph.CanFocus = false;
         Application.Resized += GameActions.Graphics.FitImageIntoDisplay;
 
-        ViewEnemy.Add(GameActions.FightDisplayGraph);
+        ViewEnemy.Add(FightDisplayGraph);
 
         // View Inventory
         SetupViewInventory();
+        EnemyManager.CreateEnemy();
+
 
         //--
         ViewCurrent.Add(ViewFightText, ViewEnemy, ViewInventory);
