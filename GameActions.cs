@@ -18,7 +18,7 @@ static class GameActions
         {"Create Lamp", $"A lamp will appear out of thin air in front of you. You won't know what kind of Lamp, but it'll  be a lamp."},
         {"Summon Pen", $"This spell summons a pen straight from the ninth circle of hell."}*/
     };
-    
+
     public static Graphics Graphics = new Graphics(GameViewSetup.FightDisplayGraph);
 
     // Fight
@@ -224,7 +224,7 @@ static class GameActions
     // Updates the MP-Label in the Fight-Scene
     public static void UpdateMPLabel()
     {
-        GameViewSetup.LabelMP.Text = $"{Player.CurrentMP} / {Player.CurrentMP}⁂";
+        GameViewSetup.LabelMP.Text = $"{Player.CurrentMP} / {Player.MaxMP}⁂";
     }
 
     // params: None
