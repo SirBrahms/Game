@@ -16,14 +16,14 @@ class Room
     public bool IsBossRoom { get; set; } = false;
     public bool ShowGeneratedInfo { get; set; } = true;
     
-    public Delegate OnEnterAction { get; set; }
+    public Delegate EnterAction { get; set; }
     public Delegate LoopAction { get; set; }
-    public Delegate OnLeaveAction { get; set; }
+    public Delegate LeaveAction { get; set; }
 
-    public Room(Delegate OnEnterAction, Delegate LoopAction, Delegate OnLeaveAction)
+    public Room(Delegate EnterAction, Delegate LoopAction, Delegate LeaveAction)
     {
-        this.OnEnterAction = OnEnterAction;
+        this.EnterAction = EnterAction;
         this.LoopAction = LoopAction;
-        this.OnLeaveAction = OnLeaveAction;
+        this.LeaveAction = LeaveAction;
     }
 }
