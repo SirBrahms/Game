@@ -41,6 +41,7 @@ static class RoomManager
         }
 
         GameViewSetup.SetupAfterFightChoices(Enumerable.Range(1, RoomAmount).Select(x => x.ToString()).ToArray());
+        GameActions.ViewSetupFunctions[2] = () => { GameViewSetup.SetupFight(); GameViewSetup.SetupAfterFightChoices(Enumerable.Range(1, RoomAmount).Select(x => x.ToString()).ToArray()); };
     }
 
     public static void LoadRoomFromSelection(object Sender)
@@ -57,6 +58,7 @@ static class RoomManager
         EnemyManager.CurrentEnemyInRoom = 0;
         EnemyManager.CreateEnemy();
         NextRooms.Clear();
+        GameActions.ViewSetupFunctions[2] = GameViewSetup.SetupFight;
     }
 
     

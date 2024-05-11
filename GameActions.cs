@@ -38,7 +38,7 @@ static class GameActions
     public static int CurrentlySelectedSpell = 0;
 
     // Display
-    private static List<Action> ViewSetupFunctions = new List<Action>()
+    public static List<Action> ViewSetupFunctions = new List<Action>()
     {
         () => GameViewSetup.SetupDashboard(),
         () => GameViewSetup.SetupSpell(),
