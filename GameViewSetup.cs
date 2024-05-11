@@ -139,7 +139,7 @@ static class GameViewSetup
         ListSpells.Width = Dim.Fill();
         ListSpells.Height = Dim.Fill();
         ListSpells.SelectedItem = 0;
-        ListSpells.OpenSelectedItem += GameActions.HandleSpellSelection;
+        ListSpells.OpenSelectedItem += (e) => GameActions.HandleSpellSelection(e);
 
         ViewSpells.Add(ListSpells);
 

@@ -206,7 +206,7 @@ static class GameActions
     public static void CastSpellInDeck(ListViewItemEventArgs e)
     {
         bool Run = true;
-        ShowData(Deck[e.Item].Name);
+        //ShowData(Deck[e.Item].Name);
         var S = (Spell?)Activator.CreateInstance(Deck[e.Item]);
         if (S is null)
         {
